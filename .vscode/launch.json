@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "Launch console application",
+          "type": "coreclr",
+          "request": "launch",
+          "preLaunchTask": "build advent",
+          "program": "${workspaceFolder}/Aoc2023/bin/Debug/net7.0/Aoc2023.dll",
+          "args": [],
+          "cwd": "${workspaceRoot}",
+          "stopAtEntry": false
+      }
+  ]
+}
