@@ -16,7 +16,6 @@ namespace Day01
     public int Execute()
     {
       int res = 0;
-
       foreach (var line in data.GetLines())
       {
         int firstNumber = 10;
@@ -24,7 +23,6 @@ namespace Day01
 
         string word = "";
 
-        // Console.WriteLine(line);
 
         foreach (char ch in line)
         {
@@ -32,9 +30,9 @@ namespace Day01
           int num = ParseState(ch, word);
           if (num != 10)
           {
-            // Console.WriteLine($"Matched value: {num}");
             lastNumber = num;
-            word = "";
+            // Remember the last character of the word in case of overlaps ("eightwo" should parse to 82 overall)
+            word = ch.ToString();
             if (firstNumber == 10)
             {
               firstNumber = num;
@@ -43,7 +41,7 @@ namespace Day01
           }
         }
 
-        Console.WriteLine($"{line}: {firstNumber}{lastNumber}");
+        // Console.WriteLine($"{line}: {firstNumber}{lastNumber}");
 
         if (firstNumber == 10 || lastNumber == 10)
         {
@@ -56,7 +54,6 @@ namespace Day01
 
     private int ParseState(char symbol, string word)
     {
-      // Console.WriteLine($"parsing {symbol}, {word}");
       int num = symbol - '0';
       if (num > 0 && num < 10)
       {
