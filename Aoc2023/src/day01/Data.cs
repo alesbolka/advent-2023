@@ -8,10 +8,14 @@ namespace Day01
 
     public static Data fromSample()
     {
-      return new Data(@"1abc2
-pqr3stu8vwx
-a1b2c3d4e5f
-treb7uchet");
+      return new Data(@"two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+gneightwoxx"); // This line caused problems with a simple regex
     }
 
     public static Data fromInput()
@@ -1015,8 +1019,7 @@ six5four1four4
 7mrtndknxzlzdkqcfjxgz9f66
 fqckxpqrjk8eighteighttwo6fivejps4
 drvglmnine7three8one7twodxtr
-mbnfjkxptbtjmgcrtkhxjvjhjnine83mpnsixfcmxcbnspx
-");
+mbnfjkxptbtjmgcrtkhxjvjhjnine83mpnsixfcmxcbnspx");
     }
   }
 }
