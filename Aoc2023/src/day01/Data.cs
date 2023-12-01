@@ -1,16 +1,21 @@
-namespace Day01 {
-  public class Data : AdventUtils.Input {
-    public Data (string input): base(input) {
+namespace Day01
+{
+  public class Data : AdventUtils.Input
+  {
+    public Data(string input) : base(input)
+    {
     }
 
-    public static Data fromSample() {
+    public static Data fromSample()
+    {
       return new Data(@"1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet");
     }
 
-    public static Data fromInput() {
+    public static Data fromInput()
+    {
       return new Data(@"tmmnhlxzpj1eightldxhjnone97
 9fivekfpl855mjmfdqzvbn
 two29eighteight1
