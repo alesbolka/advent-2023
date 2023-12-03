@@ -54,6 +54,12 @@ namespace Day03
 
           numStr += line[linePos];
         }
+
+        if (numStr.Length > 0)
+        {
+          numbers.Add(new NumberLocation(ii, line.Length - numStr.Length, numStr.Length, int.Parse(numStr)));
+          numStr = "";
+        }
         ii++;
       }
     }
