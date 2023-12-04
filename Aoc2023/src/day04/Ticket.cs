@@ -24,6 +24,19 @@ namespace Day04
       ticketNumbers = CleanParse(numbers[1]);
     }
 
+    public int GetMatchCount()
+    {
+      int res = 0;
+      foreach (int val in ticketNumbers)
+      {
+        if (winners.Contains(val))
+        {
+          res++;
+        }
+      }
+      return res;
+    }
+
     public int PointValue()
     {
       int res = 0;
