@@ -18,6 +18,22 @@ namespace Day07
       {'2', 0},
     };
 
+    protected Dictionary<char, long> cardRanksJoker = new(){
+      {'A', 13},
+      {'K', 12},
+      {'Q', 11},
+      {'J', 1},
+      {'T', 10},
+      {'9', 9},
+      {'8', 8},
+      {'7', 7},
+      {'6', 6},
+      {'5', 5},
+      {'4', 4},
+      {'3', 3},
+      {'2', 2},
+    };
+
     protected long bet;
     public string handString;
 
@@ -26,6 +42,7 @@ namespace Day07
       get { return bet; }
     }
 
+    protected long jokerScore;
     protected long secondaryScore;
     protected long primaryScore;
 
@@ -61,7 +78,7 @@ namespace Day07
       return $"Hand: {handString}, primary: {primaryScore}, secondary:{secondaryScore}";
     }
 
-    public Hand(string line)
+    public Hand(string line, bool jokerSpecial = false)
     {
       cards = new();
       string[] parts = line.Split(" ");
@@ -76,52 +93,60 @@ namespace Day07
         {
           cards[parts[0][ii]] = 0;
         }
-        secondary += cardRanks[parts[0][ii]].ToString("D2");
+
+        secondary += jokerSpecial ? cardRanksJoker[parts[0][ii]].ToString("D2") : cardRanks[parts[0][ii]].ToString("D2");
         cards[parts[0][ii]]++;
       }
 
-      switch (cards.Values.Max())
+
+      primaryScore = DeterminePrimaryScore(cards.Values.ToList());
+      secondaryScore = long.Parse(secondary);
+
+      if (jokerSpecial && cards.ContainsKey('J') && cards.Count > 1)
+      {
+        long jokerCount = cards['J'];
+        cards.Remove('J');
+        var maxKey = cards.MaxBy(kvp => kvp.Value).Key;
+        cards[maxKey] += jokerCount;
+        primaryScore = DeterminePrimaryScore(cards.Values.ToList());
+      }
+    }
+
+    protected long DeterminePrimaryScore(List<long> values)
+    {
+      switch (values.Max())
       {
         case 5:
           // Five of a kind
-          // Console.WriteLine($"Five of a kind {line}");
-          primaryScore = 7;
-          break;
+          return 7;
         case 4:
           // four of a kind
-          // Console.WriteLine($"Four of a kind {line}");
-          primaryScore = 6;
-          break;
+          return 6;
         case 3:
-          if (cards.Values.Min() == 2)
+          if (values.Min() == 2)
           {
             // full house
-            primaryScore = 5;
+            return 5;
           }
           else
           {
             // Three of a kind
-            primaryScore = 4;
+            return 4;
           }
-          break;
         case 2:
-          if (cards.Values.Where(val => val == 2).Count() == 2)
+          if (values.Where(val => val == 2).Count() == 2)
           {
             // Two pair
-            primaryScore = 3;
+            return 3;
           }
           else
           {
             // Single pair
-            primaryScore = 2;
+            return 2;
           }
-          break;
         default:
-          primaryScore = 1;
-          break;
+          return 1;
       }
-
-      secondaryScore = long.Parse(secondary);
     }
   }
 }
