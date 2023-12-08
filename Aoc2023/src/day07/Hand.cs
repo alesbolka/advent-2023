@@ -42,7 +42,6 @@ namespace Day07
       get { return bet; }
     }
 
-    protected long jokerScore;
     protected long secondaryScore;
     protected long primaryScore;
 
@@ -53,12 +52,12 @@ namespace Day07
 
     Dictionary<char, long> cards;
 
-    public bool Equals(Hand other)
+    public bool Equals(Hand? other)
     {
       return other != null && this.handString.Equals(other.handString);
     }
 
-    public int CompareTo(Hand other)
+    public int CompareTo(Hand? other)
     {
       if (other == null)
       {
